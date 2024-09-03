@@ -43,4 +43,5 @@ vim.api.nvim_set_keymap("n", "<leader>ua", ":bufdo update<CR>", { noremap = true
 -- keymap to exit vim
 vim.api.nvim_set_keymap("n", "<leader>qq", ":q<CR>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "<leader>qa", ":qa<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>qaa", ":qa<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>qaf", ":qa!<CR>", { noremap = true, silent = true })

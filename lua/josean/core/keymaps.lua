@@ -33,3 +33,14 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 
 keymap.set("t", "kj", [[<C-\><C-n>]], { noremap = true, silent = true })
 keymap.set("n", "<leader>tt", ":term<CR>", { noremap = true, silent = true })
+
+-- keymap to save file
+vim.api.nvim_set_keymap("n", "<leader>uf", ":update<CR>", { noremap = true, silent = true })
+
+-- Map <leader>zza to :bufdo update
+vim.api.nvim_set_keymap("n", "<leader>ua", ":bufdo update<CR>", { noremap = true, silent = true })
+
+-- keymap to exit vim
+vim.api.nvim_set_keymap("n", "<leader>qq", ":q<CR>", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("n", "<leader>qa", ":qa<CR>", { noremap = true, silent = true })

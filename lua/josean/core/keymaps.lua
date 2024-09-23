@@ -45,3 +45,8 @@ vim.api.nvim_set_keymap("n", "<leader>qq", ":q<CR>", { noremap = true, silent = 
 
 vim.api.nvim_set_keymap("n", "<leader>qaa", ":qa<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>qaf", ":qa!<CR>", { noremap = true, silent = true })
+
+-- keymap to shift a visually selected block of code to up or down
+
+vim.api.nvim_set_keymap("x", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("x", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })

@@ -6,4 +6,3 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		vim.wo.relativenumber = false
 	end,
 })
-vim.opt.cmdheight = 0

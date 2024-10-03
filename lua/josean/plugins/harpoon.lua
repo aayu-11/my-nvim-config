@@ -66,13 +66,13 @@ return {
 			-- Navigate between Harpoon files (Next and Previous)
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>hn",
+				"<leader>gn",
 				":lua require('harpoon.ui').nav_next()<CR>",
 				{ noremap = true, silent = true }
 			)
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>hp",
+				"<leader>gp",
 				":lua require('harpoon.ui').nav_prev()<CR>",
 				{ noremap = true, silent = true }
 			)

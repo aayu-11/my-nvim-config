@@ -6,3 +6,11 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		vim.wo.relativenumber = false
 	end,
 })
+
+-- Highlight yanked region for 200 milliseconds
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+	end,
+	pattern = "*",
+})

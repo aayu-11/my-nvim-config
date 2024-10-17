@@ -12,7 +12,7 @@ return {
 				width = 35,
 				side = "right",
 				relativenumber = false,
-				adaptive_size = true,
+				adaptive_size = false,
 			},
 			-- change folder arrow icons
 			renderer = {
@@ -29,10 +29,6 @@ return {
 				},
 			},
 			sync_root_with_cwd = true,
-			update_focused_file = {
-				enable = true,
-				update_root = true,
-			},
 			tab = {
 				sync = {
 					open = true, -- Sync tree with opened tabs
@@ -57,6 +53,16 @@ return {
 			git = {
 				ignore = false,
 			},
+			on_attach = function(bufnr)
+				local api = require("nvim-tree.api")
+
+				-- Setup default keymaps along with your custom ones
+				api.config.mappings.default_on_attach(bufnr)
+
+				-- Custom remaps
+				vim.keymap.set("n", "o", api.node.open.tab, { buffer = bufnr, noremap = true }) -- Open in new tab
+				vim.keymap.set("n", "<CR>", api.node.open.edit, { buffer = bufnr, noremap = true }) -- Open in edit mode
+			end,
 		})
 
 		-- set keymaps

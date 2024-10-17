@@ -13,6 +13,8 @@ opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 vim.o.numberwidth = 1
+opt.foldlevelstart = 99 -- start with all folds open
+opt.foldmethod = "indent"
 -- line wrapping
 opt.wrap = false -- disable line wrapping
 

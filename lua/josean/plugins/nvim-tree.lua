@@ -7,12 +7,12 @@ return {
 		-- recommended settings from nvim-tree documentation
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
-
 		nvimtree.setup({
 			view = {
 				width = 35,
 				side = "right",
 				relativenumber = false,
+				adaptive_size = true,
 			},
 			-- change folder arrow icons
 			renderer = {
@@ -28,22 +28,42 @@ return {
 					},
 				},
 			},
+			sync_root_with_cwd = true,
+			update_focused_file = {
+				enable = true,
+				update_root = true,
+			},
+			tab = {
+				sync = {
+					open = true, -- Sync tree with opened tabs
+					close = true, -- Close tree when the tab is closed
+				},
+			},
 			-- disable window_picker for
 			-- explorer to work well with
 			-- window splits
 			actions = {
 				open_file = {
+					quit_on_open = false,
 					window_picker = {
 						enable = false,
 					},
 				},
 			},
+
 			filters = {
 				custom = { ".DS_Store" },
 			},
 			git = {
 				ignore = false,
 			},
+			on_attach = function(bufnr)
+				local api = require("nvim-tree.api")
+
+				-- Remap enter to open in new tab
+				vim.keymap.set("n", "o", api.node.open.tab, { buffer = bufnr, noremap = true })
+				vim.keymap.set("n", "<CR>", api.node.open.edit, { buffer = bufnr, noremap = true })
+			end,
 		})
 
 		-- set keymaps

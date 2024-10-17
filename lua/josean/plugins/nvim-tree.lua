@@ -57,13 +57,6 @@ return {
 			git = {
 				ignore = false,
 			},
-			on_attach = function(bufnr)
-				local api = require("nvim-tree.api")
-
-				-- Remap enter to open in new tab
-				vim.keymap.set("n", "o", api.node.open.tab, { buffer = bufnr, noremap = true })
-				vim.keymap.set("n", "<CR>", api.node.open.edit, { buffer = bufnr, noremap = true })
-			end,
 		})
 
 		-- set keymaps

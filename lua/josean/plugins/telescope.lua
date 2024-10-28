@@ -20,10 +20,20 @@ return {
 						["<C-k>"] = actions.move_selection_previous, -- move to prev result
 						["<C-j>"] = actions.move_selection_next, -- move to next result
 						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-						["<CR>"] = actions.select_tab,
+						["<CR>"] = actions.select_default + actions.center,
+						["<C-o>"] = actions.select_tab + actions.center,
+						["<C-v>"] = actions.select_vertical,
+						["<C-h>"] = actions.select_horizontal,
 					},
 					n = {
-						["<CR>"] = actions.select_default,
+						["<CR>"] = actions.select_default + actions.center,
+						["o"] = actions.select_tab + actions.center,
+						["<C-k>"] = actions.move_selection_previous, -- move to prev result
+						["<C-j>"] = actions.move_selection_next, -- move to next result
+						["q"] = actions.close,
+						["v"] = actions.select_vertical,
+						["h"] = actions.select_horizontal,
+						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 					},
 				},
 			},

@@ -35,55 +35,56 @@ keymap.set("t", "kj", [[<C-\><C-n>]], { noremap = true, silent = true })
 keymap.set("n", "<leader>tt", ":term<CR>", { noremap = true, silent = true })
 
 -- keymap to exit vim
-vim.api.nvim_set_keymap("n", "<leader>ww", ":w<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>wa", ":wa<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>qq", ":q<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>ww", ":w<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>wa", ":wa<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>qq", ":q<CR>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "<leader>qa", ":qa<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>qfa", ":qa!<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>qa", ":qa<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>qfa", ":qa!<CR>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "<leader>wq", ":wq<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>wq", ":wq<CR>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "<leader>wQ", ":wqa<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>wQ", ":wqa<CR>", { noremap = true, silent = true })
 -- keymap to shift a visually selected block of code to up or down
 
-vim.api.nvim_set_keymap("x", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("x", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+keymap.set("x", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+keymap.set("x", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 -- Local copy and paste
-vim.api.nvim_set_keymap("n", "y", '"0y', { noremap = true })
-vim.api.nvim_set_keymap("n", "p", '"0p', { noremap = true })
-vim.api.nvim_set_keymap("v", "y", '"0y', { noremap = true })
-vim.api.nvim_set_keymap("v", "p", '"0p', { noremap = true })
-vim.api.nvim_set_keymap("x", "y", '"0y', { noremap = true })
-vim.api.nvim_set_keymap("x", "p", '"0p', { noremap = true })
+keymap.set("n", "yy", '"0y', { noremap = true })
+keymap.set("n", "<leader>p", '"0p', { noremap = true })
+keymap.set("v", "y", '"0y', { noremap = true })
+keymap.set("v", "<leader>p", '"0p', { noremap = true })
+keymap.set("x", "y", '"0y', { noremap = true })
+keymap.set("x", "<leader>p", '"0p', { noremap = true })
 
 -- System clipboard copy and paste
-vim.api.nvim_set_keymap("n", "Y", '"+yy', { noremap = true })
-vim.api.nvim_set_keymap("n", "P", '"+p', { noremap = true })
-vim.api.nvim_set_keymap("v", "Y", '"+yy', { noremap = true })
-vim.api.nvim_set_keymap("v", "P", '"+p', { noremap = true })
-vim.api.nvim_set_keymap("x", "Y", '"+yy', { noremap = true })
-vim.api.nvim_set_keymap("x", "P", '"+p', { noremap = true })
+keymap.set("n", "Y", '"+yy', { noremap = true })
+keymap.set("n", "P", '"+p', { noremap = true })
+keymap.set("v", "Y", '"+yy', { noremap = true })
+keymap.set("v", "P", '"+p', { noremap = true })
+keymap.set("x", "Y", '"+yy', { noremap = true })
+keymap.set("x", "P", '"+p', { noremap = true })
 
 -- Copy the current line to local buffer
-vim.api.nvim_set_keymap("n", "yy", "yy", { noremap = true })
+keymap.set("n", "yy", "yy", { noremap = true })
 
 -- Copy the current line to the system clipboard
-vim.api.nvim_set_keymap("n", "YY", '"+yy', { noremap = true })
+keymap.set("n", "YY", '"+yy', { noremap = true })
 -- Example keymap to search Neovim help using Telescope
-vim.api.nvim_set_keymap(
+keymap.set(
 	"n", -- Normal mode keymap
 	"<leader>fh", -- Keybinding (you can change this to your preference)
 	":Telescope help_tags<CR>", -- Command to search help tags using Telescope
 	{ noremap = true, silent = true } -- Non-recursive and silent
 )
 
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>fb",
-	":Telescope current_buffer_fuzzy_find<CR>",
-	{ noremap = true, silent = true }
-)
+keymap.set("n", "<leader>fb", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
+
+-- Resize splits in vim motion directions
+keymap.set("n", "<M-j>", ":resize +2<CR>", { silent = true }) -- Increase height (downwards)
+keymap.set("n", "<M-k>", ":resize -2<CR>", { silent = true }) -- Decrease height (upwards)
+keymap.set("n", "<M-h>", ":vertical resize -2<CR>", { silent = true }) -- Decrease width (left)
+keymap.set("n", "<M-l>", ":vertical resize +2<CR>", { silent = true }) -- Increase width (right)

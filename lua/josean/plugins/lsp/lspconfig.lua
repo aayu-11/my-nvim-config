@@ -72,7 +72,16 @@ return {
 				keymap.set("n", "<leader>wS", "<cmd>Telescope lsp_workspace_symbols<CR>", opts) -- show workspace symbols
 			end,
 		})
-
+		-- Setup handlers for better hover windows
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+			-- Customize hover window appearance
+			border = "rounded",
+			width = 60,
+			-- Set a reasonable max height
+			max_height = math.floor(vim.o.lines * 0.5),
+			-- Set a reasonable max width
+			max_width = math.floor(vim.o.columns * 0.5),
+		})
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 

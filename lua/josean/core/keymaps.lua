@@ -32,7 +32,6 @@ keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) 
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
 keymap.set("t", "kj", [[<C-\><C-n>]], { noremap = true, silent = true })
-keymap.set("n", "<leader>tt", ":term<CR>", { noremap = true, silent = true })
 
 -- keymap to exit vim
 keymap.set("n", "<leader>ww", ":w<CR>", { noremap = true, silent = true })

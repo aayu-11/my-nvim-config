@@ -2,20 +2,45 @@
 return {
 	{
 		"ThePrimeagen/harpoon",
-		dependencies = { "nvim-lua/plenary.nvim" }, -- Required dependency
+		dependencies = { "nvim-lua/plenary.nvim" },
 
 		config = function()
+			-- Set up highlight group for harpoon border
+			vim.api.nvim_set_hl(0, "HarpoonBorder", { fg = "#00919f" }) -- Using the green from your colorscheme
+
 			require("harpoon").setup({
-				-- Optional configuration options for Harpoon
 				global_settings = {
 					save_on_toggle = false,
 					save_on_change = true,
 					enter_on_sendcmd = false,
 				},
+				menu = {
+					width = 50,
+					height = 12,
+					borderchars = {
+						"─",
+						"│",
+						"─",
+						"│",
+						"╭",
+						"╮",
+						"╯",
+						"╰",
+					},
+				},
 			})
 
-			-- Setup keybindings for Harpoon
-			-- Add current file to Harpoon marks
+			-- Override the menu UI to use our custom border color
+			local orig_menu = require("harpoon.ui").toggle_quick_menu
+			require("harpoon.ui").toggle_quick_menu = function()
+				orig_menu()
+				-- Get the current window
+				local win = vim.api.nvim_get_current_win()
+				-- Set the window border highlight
+				vim.api.nvim_win_set_option(win, "winhl", "FloatBorder:HarpoonBorder")
+			end
+
+			-- Rest of your keybindings remain the same...
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>ha",
@@ -23,7 +48,6 @@ return {
 				{ noremap = true, silent = true }
 			)
 
-			-- Show Harpoon menu
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>hh",
@@ -31,7 +55,6 @@ return {
 				{ noremap = true, silent = true }
 			)
 
-			-- Navigate between specific Harpoon marks (1-4)
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>gh",
@@ -63,7 +86,6 @@ return {
 				{ noremap = true, silent = true }
 			)
 
-			-- Navigate between Harpoon files (Next and Previous)
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>gn",
@@ -77,7 +99,6 @@ return {
 				{ noremap = true, silent = true }
 			)
 
-			-- Optional: Telescope integration
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>ht",

@@ -10,7 +10,6 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		config = function()
-			-- Configure custom kind icons and colors (VS Code style)
 			local kinds = {
 				File = "󰈙",
 				Module = "",
@@ -40,55 +39,92 @@ return {
 				TypeParameter = "󰊄",
 			}
 
-			-- Setup barbecue
 			require("barbecue").setup({
 				theme = {
-					-- 		-- VS Code-like colors
 					normal = { fg = "#a6a6c6" },
-					-- 		separator = { fg = "#606060" },
-					-- 		modified = { fg = "#FFCC00" },
-					-- 		dirname = { fg = "#606060" },
-					-- 		basename = { fg = "#9CDCFE", bold = true },
-					-- 		context = { fg = "#9CDCFE" },
-					-- 		context_function = { fg = "#DCDCAA" },
-					-- 		context_method = { fg = "#DCDCAA" },
-					-- 		context_property = { fg = "#9CDCFE" },
-					-- 		context_variable = { fg = "#9CDCFE" },
 				},
-				-- 	symbols = {
-				-- 		modified = "●",
-				-- 		ellipsis = "...",
-				-- 		separator = "",
-				-- 	},
-				-- 	kinds = kinds,
 			})
 
-			-- Enhanced document symbols function
-			local function document_symbols()
+			local navic = require("nvim-navic")
+			navic.setup({
+				icons = kinds,
+				highlight = true,
+				separator = " > ",
+				depth_limit = 0,
+				depth_limit_indicator = "..",
+				click = false,
+			})
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					if client.server_capabilities.documentSymbolProvider then
+						navic.attach(client, args.buf)
+					end
+				end,
+			})
+
+			local function create_symbols_popup(symbols_filter)
+				local win_width = vim.api.nvim_win_get_width(0)
+				local saved_cursor = vim.fn.getcurpos()
+				vim.api.nvim_win_set_cursor(0, { 2, win_width - 1 })
+
 				local opts = {
-					symbols = {
-						"Class",
-						"Function",
-						"Method",
-						"Constructor",
-						"Interface",
-						"Module",
-						"Struct",
-						"Trait",
-						"Field",
-						"Property",
-					},
+					symbols = symbols_filter,
 					symbol_width = 40,
 					symbol_fmt = function(symbol)
 						local symbol_kind_icon = kinds[symbol.kind] or ""
 						return string.format("%s %s", symbol_kind_icon, symbol.name)
 					end,
+					layout_config = {
+						cursor = {
+							width = 0.5,
+							height = 0.4,
+							preview_cutoff = 1,
+						},
+					},
+					layout_strategy = "cursor",
+					sorting_strategy = "ascending",
+					results_title = false,
+					prompt_title = false,
+					borderchars = {
+						prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+						results = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+						preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+					},
+					mappings = {
+						i = {
+							["<C-j>"] = "move_selection_next",
+							["<C-k>"] = "move_selection_previous",
+							["<CR>"] = "select",
+							["<C-c>"] = "close",
+							["<Esc>"] = "close",
+						},
+					},
 				}
+
 				require("telescope.builtin").lsp_document_symbols(opts)
+				vim.fn.setpos(".", saved_cursor)
 			end
 
-			-- Keymaps
-			vim.keymap.set("n", "<leader>df", document_symbols, { noremap = true, silent = true })
+			local function document_functions()
+				create_symbols_popup({
+					"Function",
+					"Class",
+					"Method",
+					"Constructor",
+					"Object",
+					"ArrowFunction",
+				})
+			end
+
+			-- Keymap for df functionality
+			vim.keymap.set(
+				"n",
+				"<leader>df",
+				document_functions,
+				{ noremap = true, silent = true, desc = "Document functions" }
+			)
 		end,
 	},
 }

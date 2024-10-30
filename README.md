@@ -1,10 +1,15 @@
 # Neovim Config from scratch
 
-- make sure to copy following .zshrc and alacritty.toml template code in your orignal .zshrc and alacritty.toml files to get the exact same behaviour or if you are using some other terminals like bash and emulator like iterm2 make sure to adjust their configurations accordingly.
+**Author**: [Josean](https://github.com/josean-dev?tab=repositories)
+
+- This is a guide to setup neovim from scratch with all the necessary plugins and configurations to make it a full fledged IDE for development. I have used Josean's neovim config as a reference to setup my own neovim config and I have made some changes to it to make it more suitable for my own use case.
+- Also sure to copy following .zshrc and alacritty.toml template code in your orignal .zshrc and alacritty.toml files to get the exact same behaviour or if you are using some other terminals like bash and emulator like iterm2 make sure to adjust their configurations accordingly.
 
 ## .zshrc
 
-```
+[Context: .zshrc]
+
+```]
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -14,6 +19,8 @@ fi
 
 PROMPT='%n~$'
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+alias reload-zsh="source ~/.zshrc"
+alias edit-zsh="code ~/.zshrc"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -133,9 +140,11 @@ alias .5='cd ../../../../../'
 
 ## alacritty.toml
 
-```
+[Context: alacritty.toml]
+
+```]
 import = [
-    "~/.config/alacritty/themes/themes/coolnight.toml"
+"~/.config/alacritty/themes/themes/coolnight.toml"
 ]
 
 [env]
@@ -168,7 +177,9 @@ size = 14
 
 ## tmux.conf
 
-```
+[Context: tmux.conf]
+
+```]
 
 set -g default-terminal "screen-256color"
 set -ga terminal-overrides ",xterm-256color:Tc"
@@ -205,9 +216,11 @@ bind-key -T copy-mode-vi 'y' send -X copy-selection # copy text with "y"
 unbind -T copy-mode-vi MouseDragEnd1Pane # don't exit copy mode after dragging with mouse
 
 # tpm plugin
+
 set -g @plugin 'tmux-plugins/tpm'
 
 # list of tmux plugins
+
 set -g @plugin 'christoomey/vim-tmux-navigator' # for navigating panes and vim/nvim with Ctrl-hjkl
 set -g @plugin 'jimeh/tmux-themepack' # to configure tmux theme
 set -g @plugin 'tmux-plugins/tmux-resurrect' # persist tmux sessions after computer restart
@@ -221,10 +234,12 @@ set -g @resurrect-capture-pane-contents 'on' # allow tmux-ressurect to capture p
 set -g @continuum-restore 'on' # enable tmux-continuum functionality
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+
 run '~/.tmux/plugins/tpm/tpm'
+
 ```
 
 - final result should look like this:
-  <img src="./lua/josean/public/Screenshot 2024-10-24 at 9.48.02 AM.png" width="1000" height="500">
-  <img src="./lua/josean/public/Screenshot 2024-10-24 at 9.48.13 AM.png" width="1000" height="500">
-  <img src="./lua/josean/public/Screenshot 2024-10-24 at 9.48.27 AM.png" width="1000" height="500">
+  <img src="./lua/josean/public/Screenshot 2024-10-24 at 9.48.02 AM.png" width="1000" height="500" alt="img">
+  <img src="./lua/josean/public/Screenshot 2024-10-24 at 9.48.13 AM.png" width="1000" height="500" alt="img">
+  <img src="./lua/josean/public/Screenshot 2024-10-24 at 9.48.27 AM.png" width="1000" height="500" alt="img">

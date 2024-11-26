@@ -50,22 +50,37 @@ keymap.set("x", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 keymap.set("x", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+keymap.set("n", "J", "mzJ`z", { noremap = true, silent = true })
 
--- Local copy and paste
-keymap.set("n", "yy", '"0y', { noremap = true })
-keymap.set("n", "<leader>p", '"0p', { noremap = true })
-keymap.set("v", "y", '"0y', { noremap = true })
-keymap.set("v", "<leader>p", '"0p', { noremap = true })
-keymap.set("x", "y", '"0y', { noremap = true })
-keymap.set("x", "<leader>p", '"0p', { noremap = true })
+keymap.set("n", "n", "nzzzv", { noremap = true, silent = true })
+keymap.set("n", "N", "Nzzzv", { noremap = true, silent = true })
 
--- System clipboard copy and paste
-keymap.set("n", "Y", '"+yy', { noremap = true })
-keymap.set("n", "P", '"+p', { noremap = true })
-keymap.set("v", "Y", '"+yy', { noremap = true })
-keymap.set("v", "P", '"+p', { noremap = true })
-keymap.set("x", "Y", '"+yy', { noremap = true })
-keymap.set("x", "P", '"+p', { noremap = true })
+keymap.set("v", "<leader>p", '"_dP', { noremap = true, silent = true })
+keymap.set("x", "<leader>p", '"_dP', { noremap = true, silent = true })
+
+keymap.set("n", "<leader>y", '"+y', { noremap = true, silent = true })
+keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
+keymap.set("x", "<leader>y", '"+y', { noremap = true, silent = true })
+keymap.set("n", "<leader>Y", '"+Y', { noremap = true, silent = true })
+
+keymap.set("n", "<leader>dd", '"_d', { noremap = true, silent = true })
+keymap.set("v", "<leader>dd", '"_d', { noremap = true, silent = true })
+keymap.set("x", "<leader>dd", '"_d', { noremap = true, silent = true })
+-- -- Local copy and paste
+-- keymap.set("n", "yy", '"0y', { noremap = true })
+-- keymap.set("n", "<leader>p", '"0p', { noremap = true })
+-- keymap.set("v", "y", '"0y', { noremap = true })
+-- keymap.set("v", "<leader>p", '"0p', { noremap = true })
+-- keymap.set("x", "y", '"0y', { noremap = true })
+-- keymap.set("x", "<leader>p", '"0p', { noremap = true })
+--
+-- -- System clipboard copy and paste
+-- keymap.set("n", "Y", '"+yy', { noremap = true })
+-- keymap.set("n", "P", '"+p', { noremap = true })
+-- keymap.set("v", "Y", '"+yy', { noremap = true })
+-- keymap.set("v", "P", '"+p', { noremap = true })
+-- keymap.set("x", "Y", '"+yy', { noremap = true })
+-- keymap.set("x", "P", '"+p', { noremap = true })
 
 -- Copy the current line to local buffer
 keymap.set("n", "yy", "yy", { noremap = true })

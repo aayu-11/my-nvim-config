@@ -60,6 +60,39 @@ return {
 			vim.cmd("highlight Folded guibg=none guifg=#505263")
 		end,
 	},
+	-- {
+	-- 	"loctvl842/monokai-pro.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("monokai-pro").setup({
+	-- 			filter = "pro", -- Choose from: classic, octagon, pro, machine, ristretto, spectrum
+	-- 			transparent_background = false,
+	-- 			terminal_colors = true,
+	-- 			devicons = true,
+	-- 		})
+	-- 		require("barbecue").setup({
+	-- 			-- ...
+	-- 			theme = "monokai-pro",
+	-- 			-- ...
+	-- 		})
+	--
+	-- 		require("which-key").setup({
+	-- 			-- ...
+	-- 			theme = "monokai-pro",
+	-- 			-- ...
+	-- 		})
+	-- 		vim.cmd("colorscheme monokai-pro")
+	-- 		require("lualine").setup({
+	-- 			options = {
+	-- 				-- ...
+	-- 				theme = "monokai-pro",
+	-- 				-- ...
+	-- 			},
+	-- 		})
+	-- 		vim.cmd([[colorscheme monokai-pro]])
+	-- 	end,
+	-- },
 }
 -- return {
 -- 	"ayu-theme/ayu-vim",

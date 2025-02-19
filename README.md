@@ -19,12 +19,11 @@ fi
 
 PROMPT='%n~$'
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-alias reload-zsh="source ~/.zshrc"
-alias edit-zsh="code ~/.zshrc"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
+alias reload-zsh="source ~/.zshrc"
+alias edit-zsh="nvim ~/.zshrc"
 # history setup
 HISTFILE=$HOME/.zhistory
 SAVEHIST=1000
@@ -33,6 +32,7 @@ setopt share_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_verify
+setopt PROMPT_SP
 
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
@@ -120,8 +120,8 @@ cppcr() {
     if [ -z "$1" ]; then
         echo "Usage: cppcr <filename.cpp>"
     else
-        file_name="${1%.*}"  # Extract the filename without the extension
-        g++ "$1" -o "$file_name" && "./$file_name"
+        file_name="${1%.*}"  # Extract filename without extension
+        g++ -std=c++17 "$1" -o "$file_name" && "./$file_name"
     fi
 }
 
@@ -136,39 +136,10 @@ alias .2='cd ../../'
 alias .3='cd ../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../../'
-```
 
-## alacritty.toml
+alias yt-dlp-hdp='yt-dlp -f "bv*[height=1080]+ba" --merge-output-format mp4 --concurrent-fragments 5'
+alias yt-dlp-hdv='yt-dlp -f "bv*[height=1080]+ba" --merge-output-format mp4 --concurrent-fragments 5'
 
-[Context: alacritty.toml]
-
-```]
-import = [
-"~/.config/alacritty/themes/themes/coolnight.toml"
-]
-
-[env]
-TERM = "xterm-256color"
-
-[window]
-padding.x = 0
-padding.y = 0
-dynamic_padding = true
-
-
-
-decorations = "buttonless"
-
-
-blur = false
-opacity = 0.8
-
-option_as_alt = "Both"
-
-[font]
-normal.family = "MesloLGS Nerd Font Mono"
-
-size = 14
 
 ```
 

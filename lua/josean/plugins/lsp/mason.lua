@@ -45,6 +45,7 @@ return {
 			"emmet_ls",
 			"prismals",
 			"pyright",
+			"ts_ls",
 		}
 
 		-- Setup mason-tool-installer with LSP servers
@@ -60,6 +61,8 @@ return {
 				"emmet_ls",
 				"prismals",
 				"pyright",
+				"typescript-language-server",
+				"eslint-lsp",
 				-- Formatters and linters
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter

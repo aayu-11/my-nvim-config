@@ -6,15 +6,6 @@ return {
 		auto_session.setup({
 			auto_restore_enabled = false,
 			auto_session_suppress_dirs = { "~/", "~/Dev/", "~/Downloads", "~/Documents", "~/Desktop/" },
-			session_lens = {
-				buftypes_to_ignore = {}, -- Filetypes that should not be included in a session
-				load_on_setup = true, -- When SessionLoad is called, should it load the session?
-				theme_conf = { border = true }, -- Options for session lens border and title
-				previewer = true, -- Show preview of session on hover
-			},
-			vim.keymap.set("n", "<leader>ls", require("auto-session.session-lens").search_session, {
-				noremap = true,
-			}),
 		})
 
 		local keymap = vim.keymap

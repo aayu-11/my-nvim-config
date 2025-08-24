@@ -30,7 +30,11 @@ return {
 				keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
 				opts.desc = "Show LSP definitions"
-				keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+				keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions in Telescope
+
+				-- direct jump to definition
+				opts.desc = "Go to definition"
+				keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
 
 				opts.desc = "Show LSP implementations"
 				keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
@@ -136,5 +140,13 @@ return {
 				},
 			},
 		})
+
+		-- TypeScript / JavaScript LSP (replaces tsserver)
+		-- Supports javascript, typescript, react and svelte projects
+		if lspconfig.ts_ls then
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+			})
+		end
 	end,
 }

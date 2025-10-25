@@ -87,6 +87,17 @@ return {
 
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
+		
+		-- Fix for bufnr error in Neovim 0.10.4
+		capabilities.workspace = capabilities.workspace or {}
+		capabilities.workspace.didChangeWatchedFiles = capabilities.workspace.didChangeWatchedFiles or {}
+		capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+		
+		-- Additional fix for Neovim 0.10.4 compatibility
+		capabilities.textDocument = capabilities.textDocument or {}
+		capabilities.textDocument.completion = capabilities.textDocument.completion or {}
+		capabilities.textDocument.completion.completionItem = capabilities.textDocument.completion.completionItem or {}
+		capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
@@ -99,8 +110,14 @@ return {
 		lspconfig.svelte.setup({
 			capabilities = capabilities,
 			on_attach = function(client, bufnr)
+				-- Ensure bufnr is a number
+				if type(bufnr) == "function" then
+					bufnr = vim.api.nvim_get_current_buf()
+				end
+				
 				vim.api.nvim_create_autocmd("BufWritePost", {
 					pattern = { "*.js", "*.ts" },
+					buffer = bufnr,
 					callback = function(ctx)
 						client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
 					end,
@@ -146,7 +163,23 @@ return {
 		if lspconfig.ts_ls then
 			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
+				on_attach = function(client, bufnr)
+					-- Ensure bufnr is a number for Neovim 0.10.4 compatibility
+					if type(bufnr) == "function" then
+						bufnr = vim.api.nvim_get_current_buf()
+					end
+				end,
 			})
+		end
+		
+		-- Additional fix: Override LSP client request function to handle bufnr properly
+		local original_request = vim.lsp.client.request
+		vim.lsp.client.request = function(client, method, params, callback, bufnr)
+			-- Ensure bufnr is a number
+			if type(bufnr) == "function" then
+				bufnr = vim.api.nvim_get_current_buf()
+			end
+			return original_request(client, method, params, callback, bufnr)
 		end
 	end,
 }
